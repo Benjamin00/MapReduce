@@ -22,7 +22,7 @@ cmdSend="java -classpath $cpath Sender $redHost $redPort"
 #keep array of pids
 pid_arr=(0 0 0 0)
 
-#start al processes in background
+#start all processes in background
 for i in 1 2 3 4; do
     #make the command for splitter i
 	fullCmdSplit="$cmdSplit $i"
