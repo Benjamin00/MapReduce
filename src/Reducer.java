@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 //use port 65539
+import java.util.concurrent.*;
 
 //questions:
 //1. how to handle communication
@@ -17,22 +18,27 @@ import java.util.HashMap;
 //TODO receive and act on message
 //TODO add barrier
 
-public class Reducer implements Runnable{
-	//** HANDLER  **//
+public class Reducer{
 	private ServerSocket serverSocket;
+    private CyclicBarrier cyclicBarrier;
     
+    
+	//hash table storing words and list of counts
+	private HashMap<String, ArrayList<Integer>> wordTable; 
+	//use a lock for the table
+	private final Object wordLock = new Object();
+	
+	//** HANDLER  **//
     public void start(int port) {		//on start, will take the input on that port and create a new stemmer handler
         try {
 			serverSocket = new ServerSocket(port);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         while (true)
 			try {
 				new ReducerHandler(serverSocket.accept()).start();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
     }
@@ -41,10 +47,10 @@ public class Reducer implements Runnable{
         try {
 			serverSocket.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
+    
     //REDUCER HANDLER
 	    private static class ReducerHandler extends Thread implements Runnable{
 	        private Socket clientSocket;
@@ -67,7 +73,7 @@ public class Reducer implements Runnable{
 		                    out.println("bye");
 		                    break;
 		                }
-		                //This is where the work is done by the ReducerHandler, takes the inputline and parses it
+		                //This is where the work is done by the ReducerHandler, takes the input line and parses it
 		                
 		                
 		                
@@ -82,13 +88,8 @@ public class Reducer implements Runnable{
 	        	}
 	    }
 	
-	    }
-    
-	//hash table storing words and list of counts
-	private HashMap<String, ArrayList<Integer>> wordTable; 
-	//use a lock for the table
-	private final Object wordLock = new Object();
-	
+    }
+
 
 	public static void main(String[] args) {
 		System.out.println("started main in reducer...");
@@ -99,12 +100,6 @@ public class Reducer implements Runnable{
 	//constructor
 	public Reducer(){
 		wordTable = new HashMap<String, ArrayList<Integer>>(100);
-	}
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	public boolean handleMessage(String msg) {
@@ -137,22 +132,28 @@ public class Reducer implements Runnable{
 		}
 		return true;
 	}
-	
-	public void tallyResults() {
-		for(String key: wordTable.keySet()){
-			// get list of numbers for key
-			ArrayList<Integer> counts = wordTable.get(key);
-			int total = addAll(counts);
-			System.out.println(key + String.valueOf(total));
+	class AggregatorThread implements Runnable{ //Runs 'Tally Results' when the cyclic barrier is completed
+		public void tallyResults() {
+			for(String key: wordTable.keySet()){
+				// get list of numbers for key
+				ArrayList<Integer> counts = wordTable.get(key);
+				int total = addAll(counts);
+				System.out.println(key + String.valueOf(total));
+			}
+		}
+		
+		private int addAll(ArrayList<Integer> counts) {
+			int sum = 0;
+			for(int val: counts) {
+				sum += val;
+			}
+			return sum;
+		}
+		@Override
+		public void run() {
+			tallyResults();
 		}
 	}
 	
-	private static int addAll(ArrayList<Integer> counts) {
-		int sum = 0;
-		for(int val: counts) {
-			sum += val;
-		}
-		return sum;
-	}
 
 }
