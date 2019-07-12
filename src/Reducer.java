@@ -45,41 +45,44 @@ public class Reducer implements Runnable{
 			e.printStackTrace();
 		}
     }
- 
-    private static class ReducerHandler extends Thread {
-        private Socket clientSocket;
-        private PrintWriter out;
-        private BufferedReader in;
- 
-        public ReducerHandler(Socket socket) { //Initialization
-            this.clientSocket = socket;
-        }
- 
-        public void run() {//read the input
-        	try {
-	            out = new PrintWriter(clientSocket.getOutputStream(), true);
-	            in = new BufferedReader(
-	              new InputStreamReader(clientSocket.getInputStream()));
-	        	
-	            String inputLine;
-	            while ((inputLine = in.readLine()) != null) {
-	                if (".".equals(inputLine)) {
-	                    out.println("bye");
-	                    break;
-	                }
-	                out.println(inputLine);
-	            }
-	           
-	            in.close();
-	            out.close();
-	            clientSocket.close();
-        	}
-        		catch(Exception e) {
-        	}
-    }
-
-    }
-    
+    //REDUCER HANDLER
+	    private static class ReducerHandler extends Thread implements Runnable{
+	        private Socket clientSocket;
+	        private PrintWriter out;
+	        private BufferedReader in;
+	 
+	        public ReducerHandler(Socket socket) { //Initialization
+	            this.clientSocket = socket;
+	        }
+	 
+	        public void run() {//read the input
+	        	try {
+		            out = new PrintWriter(clientSocket.getOutputStream(), true);
+		            in = new BufferedReader(
+		              new InputStreamReader(clientSocket.getInputStream()));
+		        	
+		            String inputLine;
+		            while ((inputLine = in.readLine()) != null) {
+		                if (".".equals(inputLine)) {
+		                    out.println("bye");
+		                    break;
+		                }
+		                //This is where the work is done by the ReducerHandler, takes the inputline and parses it
+		                
+		                
+		                
+		                
+		                out.println(inputLine);
+		            }
+		            in.close();
+		            out.close();
+		            clientSocket.close();
+	        	}
+	        		catch(Exception e) {
+	        	}
+	    }
+	
+	    }
     
 	//hash table storing words and list of counts
 	private HashMap<String, ArrayList<Integer>> wordTable; 
