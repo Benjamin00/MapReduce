@@ -9,7 +9,7 @@ public class Sender {
     public static void main(String [] args) {
     	Sender s = new Sender();
     	for(String i:args) {
-    		s.startConnection("127.0.0.1",65539);
+    		s.startConnection("127.0.0.1",777);
     		s.sendMessage(i);
     		s.stopConnection();
     	}
