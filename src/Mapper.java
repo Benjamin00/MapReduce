@@ -2,15 +2,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mapper {
-	static List<String> stringList = new ArrayList<String>();
+	public List<String> stringList = new ArrayList<String>();
 	public static void main(String[] args) {
-		Mapper("desk is big desk");
-		System.out.print(stringList);
+		Mapper myMap = new Mapper("desk is big desk");
+		System.out.print(myMap.stringList);
 	}
-	
-	
 
-	public static void Mapper(String line)
+
+	public Mapper(String line)
 	{
 		String[] tokens = line.split(" ");
 		for(String temp: tokens)
