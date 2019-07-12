@@ -14,7 +14,7 @@ public class Sender {
 
          try {
 			while((str = reader.readLine()) != null)
-			s.startConnection("127.0.0.1",777);
+				s.startConnection("127.0.0.1",777);
     		s.sendMessage(str);
     		s.stopConnection();
 		} catch (IOException e) {

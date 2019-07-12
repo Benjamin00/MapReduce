@@ -6,7 +6,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
-//use port 65539
 import java.util.concurrent.*;
 
 //questions:
@@ -71,8 +70,9 @@ public class Reducer{
 		                    out.println("bye");
 		                    break;
 		                }
-		                //This is where the work is done by the ReducerHandler, takes the input line and parses it
-		                
+		                //This is where the work is done by the ReducerHandler, 
+		                //takes the input line and parses it
+		                handleMessage(inputLine);
 		                
 		                
 		                cyclicBarrier.await();
@@ -121,13 +121,15 @@ public class Reducer{
 	public static void main(String[] args) {
 		System.out.println("started main in reducer...");
 		Reducer server = new Reducer();
-		server.start(65539);
+		server.start(777);
 	}
 	
 	//constructor
 	public Reducer(){
 		wordTable = new HashMap<String, ArrayList<Integer>>(100);
-		cyclicBarrier = new CyclicBarrier(4,new AggregatorThread());
+		//cyclicBarrier = new CyclicBarrier(4,new AggregatorThread());
+		cyclicBarrier = new CyclicBarrier(1,new AggregatorThread());
+
 	}
 	
 	class AggregatorThread implements Runnable{ //Runs 'Tally Results' when the cyclic barrier is completed
