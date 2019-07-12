@@ -30,7 +30,8 @@ public class Mapper {
 	
 	public void print() {
 		for(String tmp: stringList) {
-			System.out.println(tmp);
+			System.out.print(tmp + ",");
 		}
+		System.out.println();
 	}
 }

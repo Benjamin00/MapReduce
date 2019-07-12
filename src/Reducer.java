@@ -72,6 +72,7 @@ public class Reducer{
 		                }
 		                //This is where the work is done by the ReducerHandler, 
 		                //takes the input line and parses it
+		                System.out.println("Received: " + inputLine);
 		                handleMessage(inputLine);
 		                
 		                
@@ -86,17 +87,23 @@ public class Reducer{
 	        	}
 	    }
 	    	public boolean handleMessage(String msg) {
-	    		//1. parse message
-	    		String parts[] = msg.split(" ");
-	    		if(parts.length != 2) {
-	    			System.out.println("ERROR: expected message format <string> <int>");
-	    			return false;
-	    		}
-	    		String key = parts[0];
-	    		int val = Integer.valueOf(parts[1]);
+	    		//0. split message by comma
+	    		String msgArr[] = msg.split(",");
 	    		
-	    		//2. add to word table
-	    		return update(key.toLowerCase(), val);
+	    		//1. parse message
+	    		for(String word: msgArr) {
+	    			String parts[] = word.split(" ");
+	    			if(parts.length != 2) {
+	    				System.out.println("ERROR: expected message format <string> <int>");
+	    				return false;
+	    			}
+	    			String key = parts[0];
+	    			int val = Integer.valueOf(parts[1]);
+
+	    			//2. add to word table
+	    			update(key.toLowerCase(), val);
+	    		}
+	    		return true;
 	    	}
 	    	
 	    	public boolean update(String key, int val) {
