@@ -1,29 +1,24 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Mapper {
-
+	static List<String> stringList = new ArrayList<String>();
 	public static void main(String[] args) {
-		Mapper("This is Vivi Song");
-		printMap();
+		Mapper("desk is big desk");
+		System.out.print(stringList);
 	}
 	
-	static Map<String,Integer> map=new HashMap<String,Integer>(); 
+	
+
 	public static void Mapper(String line)
 	{
 		String[] tokens = line.split(" ");
 		for(String temp: tokens)
 		{
 			temp = temp.toLowerCase();
-			map.put(temp, 1);
-		}
-	}
-	
-	public static void printMap()
-	{
-		for (Entry<String, Integer> entry : map.entrySet()) {
-		    System.out.println(entry.getKey() +  " "+ entry.getValue()+ ",");
+			temp += " 1";
+			//System.out.print(temp);
+			stringList.add(temp);
 		}
 	}
 }
