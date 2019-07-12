@@ -7,12 +7,21 @@ public class Sender {
     private PrintWriter out;
     private BufferedReader in;
     public static void main(String [] args) {
-    	Sender s = new Sender();
-    	for(String i:args) {
-    		s.startConnection("127.0.0.1",65539);
-    		s.sendMessage(i);
+    	 BufferedReader reader =  
+                 new BufferedReader(new InputStreamReader(System.in)); 
+    	 String str = new String();
+         Sender s = new Sender();
+
+         try {
+			while((str = reader.readLine()) != null)
+			s.startConnection("127.0.0.1",777);
+    		s.sendMessage(str);
     		s.stopConnection();
-    	}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+    		
     }
 	//function to begin connection to a given ip and port
 	public void startConnection(String ip, int port) {
@@ -42,6 +51,7 @@ public class Sender {
 	 //close the connection
 	    public void stopConnection() {
 	        try {
+	        	this.sendMessage("."); //send a connection to the reducer handler to stop
 				in.close();
 				out.close();
 		        clientSocket.close();
