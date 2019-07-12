@@ -1,6 +1,11 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 //use port 65539
 
 //questions:
@@ -13,6 +18,67 @@ import java.util.HashMap;
 //TODO add barrier
 
 public class Reducer implements Runnable{
+	//** HANDLER  **//
+private ServerSocket serverSocket;
+    
+    public void start(int port) {		//on start, will take the input on that port and create a new stemmer handler
+        try {
+			serverSocket = new ServerSocket(port);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        while (true)
+			try {
+				new ReducerHandler(serverSocket.accept()).start();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    }
+ 
+    public void stop() {
+        try {
+			serverSocket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+ 
+    private static class ReducerHandler extends Thread {
+        private Socket clientSocket;
+        private PrintWriter out;
+        private BufferedReader in;
+ 
+        public ReducerHandler(Socket socket) { //Initialization
+            this.clientSocket = socket;
+        }
+ 
+        public void run() {//read the input
+        	try {
+	            out = new PrintWriter(clientSocket.getOutputStream(), true);
+	            in = new BufferedReader(
+	              new InputStreamReader(clientSocket.getInputStream()));
+	        	
+	            String inputLine;
+	            while ((inputLine = in.readLine()) != null) {
+	                if (".".equals(inputLine)) {
+	                    out.println("bye");
+	                    break;
+	                }
+	                out.println(inputLine);
+	            }
+	           
+	            in.close();
+	            out.close();
+	            clientSocket.close();
+        	}
+        		catch(Exception e) {
+        	}
+    }
+
+    }
 	//hash table storing words and list of counts
 	private HashMap<String, ArrayList<Integer>> wordTable; 
 	//use a lock for the table
