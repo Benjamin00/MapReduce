@@ -12,7 +12,7 @@ public class Mapper {
 		BufferedReader bufferedReaderObj = new BufferedReader(readerObject);
 		String str = bufferedReaderObj.readLine(); 
         Mapper myMap = new Mapper(str);
-        System.out.print(myMap.stringList);
+        myMap.print();
 	}
 
 
@@ -25,6 +25,12 @@ public class Mapper {
 			temp += " 1";
 			//System.out.print(temp);
 			stringList.add(temp);
+		}
+	}
+	
+	public void print() {
+		for(String tmp: stringList) {
+			System.out.println(tmp);
 		}
 	}
 }
