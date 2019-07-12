@@ -46,6 +46,11 @@ public class Splitter {
 
 		int numIterations = 0; 
 
+
+
+
+		
+
 		int beginningOfQuarter;
 		int endOfQuarter; 
 
