@@ -20,13 +20,11 @@ import java.util.concurrent.*;
 
 public class Reducer{
 	private ServerSocket serverSocket;
-    private CyclicBarrier cyclicBarrier;
-    
-    
+    private static CyclicBarrier cyclicBarrier;
 	//hash table storing words and list of counts
-	private HashMap<String, ArrayList<Integer>> wordTable; 
+	private static HashMap<String, ArrayList<Integer>> wordTable; 
 	//use a lock for the table
-	private final Object wordLock = new Object();
+	private final static Object wordLock = new Object();
 	
 	//** HANDLER  **//
     public void start(int port) {		//on start, will take the input on that port and create a new stemmer handler
@@ -77,7 +75,7 @@ public class Reducer{
 		                
 		                
 		                
-		                
+		                cyclicBarrier.await();
 		                out.println(inputLine);
 		            }
 		            in.close();
@@ -87,9 +85,38 @@ public class Reducer{
 	        		catch(Exception e) {
 	        	}
 	    }
-	
+	    	public boolean handleMessage(String msg) {
+	    		//1. parse message
+	    		String parts[] = msg.split(" ");
+	    		if(parts.length != 2) {
+	    			System.out.println("ERROR: expected message format <string> <int>");
+	    			return false;
+	    		}
+	    		String key = parts[0];
+	    		int val = Integer.valueOf(parts[1]);
+	    		
+	    		//2. add to word table
+	    		return update(key.toLowerCase(), val);
+	    	}
+	    	
+	    	public boolean update(String key, int val) {
+	    		//update word table with the key and value
+	    		synchronized(wordLock){
+	    			if(wordTable.containsKey(key)) {
+	    				//key exists; update entry
+	    				wordTable.get(key).add(val);
+	    			}
+	    			else {
+	    				//key doesn't exist yet; add new entry
+	    				ArrayList<Integer> tmpList = new ArrayList<Integer>();
+	    				tmpList.add(val);
+	    				wordTable.put(key, tmpList);
+	    			}
+	    		}
+	    		return true;
+	    	}
     }
-
+	    //* END HANDLER *//
 
 	public static void main(String[] args) {
 		System.out.println("started main in reducer...");
@@ -100,38 +127,9 @@ public class Reducer{
 	//constructor
 	public Reducer(){
 		wordTable = new HashMap<String, ArrayList<Integer>>(100);
+		cyclicBarrier = new CyclicBarrier(4,new AggregatorThread());
 	}
 	
-	public boolean handleMessage(String msg) {
-		//1. parse message
-		String parts[] = msg.split(" ");
-		if(parts.length != 2) {
-			System.out.println("ERROR: expected message format <string> <int>");
-			return false;
-		}
-		String key = parts[0];
-		int val = Integer.valueOf(parts[1]);
-		
-		//2. add to word table
-		return update(key.toLowerCase(), val);
-	}
-	
-	public boolean update(String key, int val) {
-		//update word table with the key and value
-		synchronized(wordLock){
-			if(wordTable.containsKey(key)) {
-				//key exists; update entry
-				wordTable.get(key).add(val);
-			}
-			else {
-				//key doesn't exist yet; add new entry
-				ArrayList<Integer> tmpList = new ArrayList<Integer>();
-				tmpList.add(val);
-				wordTable.put(key, tmpList);
-			}
-		}
-		return true;
-	}
 	class AggregatorThread implements Runnable{ //Runs 'Tally Results' when the cyclic barrier is completed
 		public void tallyResults() {
 			for(String key: wordTable.keySet()){
