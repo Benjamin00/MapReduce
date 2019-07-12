@@ -115,13 +115,22 @@ public class Reducer implements Runnable{
 		int val = Integer.valueOf(parts[1]);
 		
 		//2. add to word table
-		return update(key, val);
+		return update(key.toLowerCase(), val);
 	}
 	
 	public boolean update(String key, int val) {
 		//update word table with the key and value
 		synchronized(wordLock){
-			wordTable.get(key).add(val);
+			if(wordTable.containsKey(key)) {
+				//key exists; update entry
+				wordTable.get(key).add(val);
+			}
+			else {
+				//key doesn't exist yet; add new entry
+				ArrayList<Integer> tmpList = new ArrayList<Integer>();
+				tmpList.add(val);
+				wordTable.put(key, tmpList);
+			}
 		}
 		return true;
 	}
