@@ -19,7 +19,7 @@ import java.util.HashMap;
 
 public class Reducer implements Runnable{
 	//** HANDLER  **//
-private ServerSocket serverSocket;
+	private ServerSocket serverSocket;
     
     public void start(int port) {		//on start, will take the input on that port and create a new stemmer handler
         try {
@@ -79,6 +79,8 @@ private ServerSocket serverSocket;
     }
 
     }
+    
+    
 	//hash table storing words and list of counts
 	private HashMap<String, ArrayList<Integer>> wordTable; 
 	//use a lock for the table
@@ -86,9 +88,9 @@ private ServerSocket serverSocket;
 	
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("started main...");
-
+		System.out.println("started main in reducer...");
+		Reducer server = new Reducer();
+		server.start(65539);
 	}
 	
 	//constructor
