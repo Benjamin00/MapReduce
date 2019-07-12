@@ -23,7 +23,7 @@ public class Mapper {
 	public static void printMap()
 	{
 		for (Entry<String, Integer> entry : map.entrySet()) {
-		    System.out.print(entry.getKey() +  " "+ entry.getValue()+ ",");
+		    System.out.println(entry.getKey() +  " "+ entry.getValue()+ ",");
 		}
 	}
 }
