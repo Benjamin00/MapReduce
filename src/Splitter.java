@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Splitter {
 
-	public static void main(String[] args) 
+	public static void main(String[] args) throws Exception
 	{
 		String filename = args[0];
 		int numLines = Integer.parseInt(args[1]);
@@ -46,11 +46,6 @@ public class Splitter {
 
 		int numIterations = 0; 
 
-
-
-
-		
-
 		int beginningOfQuarter;
 		int endOfQuarter; 
 
@@ -78,6 +73,42 @@ public class Splitter {
 		{
 			// Do Nothing
 		}
+
+		// *** File is opened and read from here 
+
+		/* File textFile = new File(in); */
+		/* textFile.open(fileName); */
+
+		/* BufferedReader buffReaderObj = new BufferedReader(new FileReader(file)); */
+
+		String contentsOfQuarter = "";
+
+		String lineContents = "";
+
+		/* while( // There is a line in the file) */
+		// {
+			// numIterations += 1;
+
+			// if(numIterations == startingLineForACertainQuarter)
+			// {
+					// Read a from the line using the buffered reader object
+
+					/* lineContents = buffReaderObj.readLine(); */
+					/* contentsOfQuarter += lineContents */
+			// }
+		// }
+
+
+
+
+
+		// We then need to pipe the contents of the quarters
+
+
+
+
+
+
 
 
 
