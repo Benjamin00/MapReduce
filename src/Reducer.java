@@ -16,6 +16,7 @@ import java.util.concurrent.*;
 //TODO communicate with sender
 //TODO receive and act on message
 //TODO add barrier
+//TODO fix synchonization of hashmap
 
 public class Reducer{
 	private ServerSocket serverSocket;
@@ -72,7 +73,7 @@ public class Reducer{
 		                }
 		                //This is where the work is done by the ReducerHandler, 
 		                //takes the input line and parses it
-		                System.out.println("Received: " + inputLine);
+		                System.out.println("Receffffived: " + inputLine);
 		                handleMessage(inputLine);
 		                
 		                
@@ -128,7 +129,7 @@ public class Reducer{
 	public static void main(String[] args) {
 		System.out.println("started main in reducer...");
 		Reducer server = new Reducer();
-		server.start(777);
+		server.start(778);
 	}
 	
 	//constructor
