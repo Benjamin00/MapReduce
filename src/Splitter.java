@@ -76,30 +76,32 @@ public class Splitter {
 
 		// *** File is opened and read from here 
 
-		/* File textFile = new File(in); */
-		/* textFile.open(fileName); */
+		// TODO: We need to make a test case file.
 
-		/* BufferedReader buffReaderObj = new BufferedReader(new FileReader(file)); */
+		File textFile = new File(/* Name of example text file should go here */);
+		
+		BufferedReader buffReaderObj = new BufferedReader(new FileReader(textFile));
 
 		String contentsOfQuarter = "";
-
 		String lineContents = "";
 
-		/* while( // There is a line in the file) */
-		// {
-			// numIterations += 1;
+		while((lineContents = buffReaderObj.readLine()) != null)
+		{
+			numIterations += 1;
 
-			// if(numIterations == startingLineForACertainQuarter)
-			// {
-					// Read a from the line using the buffered reader object
+			if(numIterations == startingLineForACertainQuarter)
+			{
+					// Reads from the line using the buffered reader object
 
-					/* lineContents = buffReaderObj.readLine(); */
-					/* contentsOfQuarter += lineContents */
-			// }
-		// }
+					lineContents = buffReaderObj.readLine();
+					contentsOfQuarter += lineContents;
+
+					// contentsOfQuarter += "\n";
+			}
+		}
 
 
-		/* System.out.println(contentsOfQuarter); */
+		System.out.println(contentsOfQuarter);
 
 
 
