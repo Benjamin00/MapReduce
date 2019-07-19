@@ -2,6 +2,8 @@ import java.io.*;
 import java.util.*;
 //import java.lang.Integer;
 
+import javax.lang.model.util.ElementScanner6;
+
 public class Splitter {
 
 	public static void main(String[] args) throws Exception
@@ -11,6 +13,8 @@ public class Splitter {
 		int quarterNumber = Integer.parseInt(args[2]);
 
 		// Calculates the line numbers for each of the quarters 
+
+		/*
 
 		int basicQuarterNumber = numLines / 4; 
 		int numTimesToAddOne = numLines % 4;
@@ -26,17 +30,31 @@ public class Splitter {
 			numLinesInEachQuarter[y] = numLinesInEachQuarter[y] + 1;
 		}
 
+		*/
+
 		// Determines the line numbers
 		
-		int startingLineNumbers[] = new int[4];
+		if (quarterNumber == 1)
+		{
 
-		startingLineNumbers[0] = 0;
-		startingLineNumbers[1] = numLinesInEachQuarter[0];
-		startingLineNumbers[2] = numLinesInEachQuarter[0] 
-								 + numLinesInEachQuarter[1];
-		startingLineNumbers[3] = numLinesInEachQuarter[0] 
-								 + numLinesInEachQuarter[1] 
-								 + numLinesInEachQuarter[2];
+		}
+		else if(quarterNumber == 2)
+		{
+
+		}
+		else if(quarterNumber == 3)
+		{
+
+		}
+		else if(quarterNumber == 4)
+		{
+
+		}
+		else
+		{
+			// Do nothing 
+			// System.out.println("Invalid Quarter Number");
+		}
 
 
 		// Reads from the file according to the line numbers in the array
