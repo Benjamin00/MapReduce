@@ -24,17 +24,17 @@ public class Splitter {
 		}
 		else if(quarterNumber == 2)
 		{
-			startingLineNumber = (int) (numLines / 4);
+			startingLineNumber = (int) ((numLines / 4) + 1);
 			endingLineNumber = (int) ((numLines * 2) / 4);
 		}
 		else if(quarterNumber == 3)
 		{
-			startingLineNumber = (int) ((numLines * 2) / 4);
+			startingLineNumber = (int) (((numLines * 2) / 4) + 1);
 			endingLineNumber = (int) ((numLines * 3) / 4);
 		}
 		else if(quarterNumber == 4)
 		{
-			startingLineNumber = (int) ((numLines * 3) / 4);
+			startingLineNumber = (int) (((numLines * 3) / 4) + 1);
 			endingLineNumber = numLines;
 		}
 		else
