@@ -49,35 +49,37 @@ public class Splitter {
 
 		// TODO: We need to make a test case file.
 
+		String filePath = "/Users/michaelyesudas/Desktop/gitHubProjects/MapReduce/src/example.txt";
 
-		File textFile = new File();
-		
-		/*
+		File textFile = new File(filePath);
 		
 		BufferedReader buffReaderObj = new BufferedReader(new FileReader(textFile));
 
-		String contentsOfQuarter = "";
 		String lineContents = "";
+		String quarterContents = "";
+
+		int numIterations = 0;
 
 		while((lineContents = buffReaderObj.readLine()) != null)
 		{
+			//System.out.println(lineContents);
+
 			numIterations += 1;
 
-			if(numIterations == startingLineForACertainQuarter)
+			if((numIterations >= startingLineNumber) && (numIterations <= endingLineNumber))
 			{
-					// Reads from the line using the buffered reader object
 
-					lineContents = buffReaderObj.readLine();
-					contentsOfQuarter += lineContents;
+				quarterContents = quarterContents + lineContents + "\n";
 
-					// contentsOfQuarter += "\n";
 			}
+
+			//System.out.println(numIterations);
+			//System.out.println(quarterContents);
 		}
+
 		
-
-
-		System.out.println(contentsOfQuarter);
-		*/
+		System.out.println(quarterContents);
+		
 
 
 
