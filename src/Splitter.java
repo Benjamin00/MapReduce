@@ -49,9 +49,10 @@ public class Splitter {
 
 		// TODO: We need to make a test case file.
 
-		/*
 
 		File textFile = new File();
+		
+		/*
 		
 		BufferedReader buffReaderObj = new BufferedReader(new FileReader(textFile));
 
@@ -84,32 +85,13 @@ public class Splitter {
 
 		// We then need to pipe the contents of the quarters
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
-		
-		
 		// TESTING PURPOSES
 
-		System.out.println("Starting Line Number: ");
+		System.out.println("File name: " + filename + "\n");
 
-		System.out.println(startingLineNumber + "\n");
+		System.out.println("Starting Line Number: " + startingLineNumber + "\n");
 
-		System.out.println("Ending Line Number: ");
-
-		System.out.println(endingLineNumber + "\n");
+		System.out.println("Ending Line Number: " + endingLineNumber + "\n");
 
 		
 
