@@ -47,11 +47,7 @@ public class Splitter {
 
 		// File is opened and read from here 
 
-		// TODO: We need to make a test case file.
-
-		String filePath = "/Users/michaelyesudas/Desktop/gitHubProjects/MapReduce/src/example.txt";
-
-		File textFile = new File(filePath);
+		File textFile = new File(filename);
 		
 		BufferedReader buffReaderObj = new BufferedReader(new FileReader(textFile));
 
@@ -89,11 +85,11 @@ public class Splitter {
 
 		// TESTING PURPOSES
 
-		System.out.println("File name: " + filename + "\n");
+		//System.out.println("File name: " + filename + "\n");
 
-		System.out.println("Starting Line Number: " + startingLineNumber + "\n");
+		//System.out.println("Starting Line Number: " + startingLineNumber + "\n");
 
-		System.out.println("Ending Line Number: " + endingLineNumber + "\n");
+		//System.out.println("Ending Line Number: " + endingLineNumber + "\n");
 
 		
 
