@@ -70,10 +70,11 @@ public class Splitter {
 			{
 
 				quarterContents = quarterContents + lineContents + "\n";
+				//System.out.println(numIterations);
 
 			}
 
-			//System.out.println(numIterations);
+			
 			//System.out.println(quarterContents);
 		}
 
