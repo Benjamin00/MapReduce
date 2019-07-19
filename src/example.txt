@@ -1,10 +1,10 @@
-Hello
-My 
-name
-is 
+Hello My 
+name is 
 Michael
-How 
-are 
-you
-doing 
-today
+How are 
+you doing 
+today 
+The weather
+is sunny and 
+very nice with
+lovely memories
