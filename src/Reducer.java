@@ -73,7 +73,6 @@ public class Reducer{
 		                }
 		                //This is where the work is done by the ReducerHandler, 
 		                //takes the input line and parses it
-		                System.out.println("Receffffived: " + inputLine);
 		                handleMessage(inputLine);
 		                
 		                
@@ -127,7 +126,6 @@ public class Reducer{
 	    //* END HANDLER *//
 
 	public static void main(String[] args) {
-		System.out.println("started main in reducer...");
 		Reducer server = new Reducer();
 		server.start(778);
 	}
@@ -146,7 +144,7 @@ public class Reducer{
 				// get list of numbers for key
 				ArrayList<Integer> counts = wordTable.get(key);
 				int total = addAll(counts);
-				System.out.println(key + String.valueOf(total));
+				System.out.println(key + " " + String.valueOf(total));
 			}
 		}
 		

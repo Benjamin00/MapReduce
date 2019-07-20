@@ -7,7 +7,6 @@ public class Sender {
 	private PrintWriter out;
 	private BufferedReader in;
 	public static void main(String [] args) {
-		System.out.println("in sender");
 		BufferedReader reader =  
 				new BufferedReader(new InputStreamReader(System.in)); 
 		String str = new String();
@@ -16,9 +15,7 @@ public class Sender {
 
 		try {
 			while((str = reader.readLine()) != null) {
-				System.out.println("Received text: " + str);
 				s.startConnection("127.0.0.1",778);
-				System.out.println("Sending: " + str);
 				resp = s.sendMessage(str);
 				s.stopConnection();
 
