@@ -17,7 +17,7 @@ public class Stemmer {
 		}
 	}
 	
-	public static String Stemmer(String line)
+	public static void Stemmer(String line)
 	{
 		line = line.replaceAll("\\p{P}", " ");//punc
 		line = line.replaceAll("\\s+", " ");
@@ -47,7 +47,7 @@ public class Stemmer {
 		line = line.replaceAll(" will ", " ");
 		line = line.replaceAll(" with ", " ");
 		//System.out.println(line);
-		return line;
+		//return line;
 	}
 
 }
