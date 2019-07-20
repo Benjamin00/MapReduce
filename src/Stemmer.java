@@ -8,16 +8,34 @@ public class Stemmer {
 	public static void main(String[] args) throws IOException {
 		Reader readerObject = new InputStreamReader(System.in);
 		BufferedReader bufferedReaderObj = new BufferedReader(readerObject);
-		String read;
+		String read = ReadBigString(bufferedReaderObj);
+		String line = Stemmer(read);
+		System.out.println(line);
+		
+		
+		
+		/*String read;
 		while((read = bufferedReaderObj.readLine())!=null)
 		{
 			read = read.toLowerCase();
-			Stemmer(read);
-	        System.out.println(read);
-		}
+			String line = Stemmer(read);
+	        System.out.println(line);
+		}*/
+		
 	}
 	
-	public static void Stemmer(String line)
+	public static String ReadBigString(BufferedReader buffIn) throws IOException
+	{
+		StringBuilder everything = new StringBuilder();
+		String line;
+		while((line = buffIn.readLine())!=null)
+		{
+			everything.append(line);
+		}
+		return everything.toString();
+	}
+	
+	public static String Stemmer(String line)
 	{
 		line = line.replaceAll("\\p{P}", " ");//punc
 		line = line.replaceAll("\\s+", " ");
@@ -47,7 +65,7 @@ public class Stemmer {
 		line = line.replaceAll(" will ", " ");
 		line = line.replaceAll(" with ", " ");
 		//System.out.println(line);
-		//return line;
+		return line;
 	}
 
 }
