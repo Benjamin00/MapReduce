@@ -31,6 +31,7 @@ public class Stemmer {
 		while((line = buffIn.readLine())!=null)
 		{
 			everything.append(line);
+			everything.append(" ");
 		}
 		return everything.toString();
 	}
@@ -40,6 +41,7 @@ public class Stemmer {
 		line = line.replaceAll("\\p{P}", " ");//punc
 		line = line.replaceAll("\\s+", " ");
 		line = line.replaceAll(" a ", " ");
+		line = line.replaceAll("\\n", " ");
 		line = line.replaceAll(" an ", " ");
 		line = line.replaceAll(" and ", " ");
 		line = line.replaceAll(" are ", " ");
