@@ -12,8 +12,8 @@ public class Stemmer {
 		while((read = bufferedReaderObj.readLine())!=null)
 		{
 			read = read.toLowerCase();
-			String line = Stemmer(read);
-	        System.out.println(line);
+			Stemmer(read);
+	        System.out.println(read);
 		}
 	}
 	
