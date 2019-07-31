@@ -47,6 +47,6 @@ for p in "${pid_arr[@]}"; do
 	wait $p
 done
 
-#stop reducer (there must be a better way ... )
+#stop reducer
 kill $pid_red
 
